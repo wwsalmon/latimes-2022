@@ -1,6 +1,8 @@
 import {useEffect, useState} from "react";
 import classNames from "classnames";
 import {useRouter} from "next/router";
+import PageContent from "./PageContent";
+import PageH2 from "./PageH2";
 
 export default function BottomBar({inline, onReset}: {inline?: boolean, onReset?: () => void}) {
     const router = useRouter();
@@ -34,17 +36,15 @@ export default function BottomBar({inline, onReset}: {inline?: boolean, onReset?
                 </div>
                 {inline && (readList.length === 4) ? (
                     <>
-                        <div className="px-4 py-2 rounded-md bg-amber-100 border-4 shadow-xl">
-                            <p>I hope this portfolio gave you a sense of my technical and reporting skills. You might be interested to know that <a href="https://github.com/wwsalmon/seattle-times-2022">this site itself was built from scratch</a> using React, or that I spent a gap year <a href="https://www.samsonzhang.com/building">working as a software engineer</a> at several venture-backed startups, or that I even <a href="https://webdevformakers.vercel.app/">teach a web development class</a> at my college.</p>
-                            <p>But the core of my passion for journalism has always centered on people. Ever since I wrote a piece about a <a
-                                href="https://theyappie.com/author/samsonzhang/">decade of California anti-ICE organizing</a>, solutions journalism has been far and away my favorite form of journalism -- a form that <a
-                                href="https://www.seattletimes.com/education-lab/">The Seattle Times helped to pioneer</a>.</p>
-                            <p>I'll never forget stumbling into a rally in San Francisco Chinatown, abandoning my plans to get interviews and making it my <a
-                                href="https://theyappie.com/aapi-activists-rising-above-hate/">first ever non-student paper pitch</a>.</p>
-                            <p>I would love to continue my human-driven and technical journalism journeys at The Seattle Times this summer.</p>
-                            <img src="/people.jpg" alt=""/>
-                            <p>Thank you for taking the time to read and consider my application!</p>
-                            <button className="px-6 py-2 bg-black text-white my-8 mx-auto rounded-md hover:bg-zinc-700 block" onClick={resetReads}>Reset story reads</button>
+                        <div className="px-4 py-2 rounded-md bg-amber-100 border-4 shadow-xl my-16">
+                            <PageContent>
+                                <PageH2>Give me the chance to serve LA this summer.</PageH2>
+                                <p>My passion for journalism has always been rooted in community, and <b>LA is where I've found community</b> these past few years: in fellow students and journalists, in Inland Empire workers, in abolitionist and Asian American organizers.</p>
+                                <img src="/Inkedfinal.jpg" alt="Compilation of photos of me interacting with sources, fellow reporters and others in California" className="my-8 p-4 bg-white rounded-md"/>
+                                <p>To the <i>Times</i>, I would <b>bring the work I've already done</b> to build community connections and to <b>understand a wide range of experiences lived in LA.</b> I hope to deepen these connections and give back to the community while growing as a journalist, and cannot imagine a better place than the <i>Los Angeles Times</i> to do it this summer.</p>
+                                <button className="px-6 py-2 bg-black text-white my-8 mx-auto rounded-md hover:bg-zinc-700 block" onClick={resetReads}>Reset story reads</button>
+                                <img src="/irena.png" alt="Screenshot of Slack message between me and my editor, where my editor says 'one day i will learn d3 from you'" className="max-w-sm rounded-md mx-auto block"/>
+                            </PageContent>
                         </div>
                     </>
                 ) : (
