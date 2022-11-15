@@ -28,8 +28,9 @@ export default function Home() {
         const div = d3.select(divRef.current);
 
         const simulation = d3.forceSimulation(projects)
-            .force("charge", d3.forceManyBody().strength(-300))
-            .force("center", d3.forceCenter(width / 2, height / 2))
+            .force("charge", d3.forceManyBody().strength(-200))
+            .force("center", d3.forceCenter(width / 2, height / 2).strength(1.5))
+            .force("collision", d3.forceCollide().radius(d => d.width / 2))
             // .force("centerY", d3.forceY(height / 2))
             // .force("centerX", d3.forceX(d => Math.min(Math.max(d.score * width, 0), width - 100)))
             .on("tick", tick);
@@ -59,8 +60,8 @@ export default function Home() {
                             .style("top", d => {
                                 return Math.max(d.y, 0) + "px"
                             })
-                            .on("mouseover", () => screen.style("display", "block"))
-                            .on("mouseout", () => screen.style("display", "none"));
+                            .on("mouseover", () => screen.style("display", "block").style("opacity", 1))
+                            .on("mouseout", () => screen.style("display", "none").style("opacity", 0));
                     },
                     update => {
                         const heights = update._groups[0].map(d => d.offsetHeight);
@@ -86,8 +87,8 @@ export default function Home() {
                             })
                             .style("display", "flex")
                             .style("align-items", "center")
-                            .on("mouseover", () => screen.style("display", "block"))
-                            .on("mouseout", () => screen.style("display", "none"));
+                            .on("mouseover", () => screen.style("display", "block").style("opacity", 1))
+                            .on("mouseout", () => screen.style("display", "none").style("opacity", 0));
 
                         thisDiv.append("img")
                             .attr("class", "storyImg")
@@ -130,14 +131,27 @@ export default function Home() {
                             .style("top", (d, i) => Math.min(Math.max(d.y, 0), height - heights[i]) + "px");
                     }
                 )
+
+            // const root = d3.select("#d3root");
+            //
+            // const zoom = d3.zoom()
+            //     .scaleExtent([0.5, 2])
+            //     .translateExtent([[-1.5 * width, -1.5 * height], [1.5 * width, 1.5 * height]])
+            //     .on("zoom", zoomed);
+            //
+            // root.call(zoom);
+            //
+            // function zoomed({transform}) {
+            //     div.style("transform", "translate(" + transform.x + "px," + transform.y + "px) scale(" + transform.k + ")").style("transform-origin","0 0");
+            // }
         }
     }, []);
 
     return (
-        <div className="relative">
+        <div className="relative" id="d3root">
             <svg ref={svgRef}/>
             <div className="absolute top-0 left-0 w-full h-full overflow-hidden" ref={divRef}></div>
-            <div className="p-12 bg-white rounded-md border border-box w-[600px] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 absolute">
+            <div className="p-12 bg-white bg-opacity-80 rounded-md border border-box w-[600px] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 absolute">
                 <h1 className="font-tn font-bold text-4xl">Good {TOD}, LA Times.<br/>My name is Samson Zhang.</h1>
                 <ul className="font-benton list-disc pl-4">
                     <li className="mt-6">I’m applying to be a data and graphics intern this summer.</li>
