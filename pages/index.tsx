@@ -258,7 +258,7 @@ export default function Home() {
                                 <img src="/profile.jpg" alt="Headshot of Samson Zhang" className="w-12 h-12 rounded-full"/>
                                 <div className="ml-4">
                                     <p className="font-tn text-xl">Samson Zhang</p>
-                                    <a href="https://twitter.com/wwsalmon" className="mt-1 text-neutral-600 text-xs flex items-center font-medium">
+                                    <a href="https://twitter.com/wwsalmon" className="mt-1 text-neutral-600 text-xs flex items-center font-medium font-benton">
                                         <FaTwitter/>
                                         <span className="ml-1">Twitter</span>
                                     </a>
@@ -288,7 +288,7 @@ export default function Home() {
                 <h1 className="text-tn leading-tight text-4xl max-w-2xl mb-8">Here are four selected projects that show what I'm all about.</h1>
                 <p className="text-lg text-neutral-600">Click through the four scenarios below to unlock my final message!</p>
                 <hr className="my-12"/>
-                <BottomBar inline={true}/>
+                <BottomBar inline={true} onReset={() => setReadList([])}/>
                 <div className="grid grid-cols-2 gap-x-4 text-white my-24">
                     {highlightedProjects.map((d, i) => (
                         <Card index={i + 1} title={d.title} read={readList.includes(d.id)} key={d.id} id={d.id}/>

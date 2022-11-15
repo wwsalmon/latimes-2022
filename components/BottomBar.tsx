@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import classNames from "classnames";
 import {useRouter} from "next/router";
 
-export default function BottomBar({inline}: {inline?: boolean}) {
+export default function BottomBar({inline, onReset}: {inline?: boolean, onReset?: () => void}) {
     const router = useRouter();
     const [readList, setReadList] = useState<string[]>([]);
 
@@ -22,6 +22,7 @@ export default function BottomBar({inline}: {inline?: boolean}) {
     function resetReads() {
         setReadList([]);
         window.localStorage.setItem("LATreadList", "[]");
+        if (onReset) onReset();
     }
 
     return (
