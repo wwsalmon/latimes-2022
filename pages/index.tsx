@@ -34,7 +34,7 @@ export const highlightedProjects = [
         index: 4,
         title: "Filling gaps in documentation of community activism",
         hed: "Claremont Undercurrents",
-        dek: "Habada.",
+        dek: "A year and a half of COVID threatened to destroy decades of campus activism. I created Undercurrents to preserve intergenerational knowledge and provide crucial documentation capacity.",
         id: "undercurrents",
     },
 ];
