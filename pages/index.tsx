@@ -2,6 +2,7 @@ import {useEffect, useRef} from "react";
 import * as d3 from "d3";
 import projects from "../projects.json";
 import { Scrollama, Step } from "react-scrollama";
+import {FaTwitter} from "react-icons/fa";
 
 const TOD = (() => {
     const currHour = new Date().getHours();
@@ -45,6 +46,33 @@ export default function Home() {
             .attr("x", 0)
             .attr("y", 0)
             .attr("fill", "#222");
+
+        const categories = ["Graphics and multimedia", "Data journalism", "Investigative and solutions", "Breaking news and features"];
+
+        svg.selectAll("line.categoryLine")
+            .data(categories)
+            .enter()
+            .append("line")
+            .attr("class", "categoryLine")
+            .attr("x1", (d, i) => (i + 1) / 4 * width)
+            .attr("x2", (d, i) => (i + 1) / 4 * width)
+            .attr("y1", 0)
+            .attr("y2", height)
+            .attr("stroke", "white")
+            .attr("stroke-width", 2)
+
+        svg.selectAll("text.categoryLabel")
+            .data(categories)
+            .enter()
+            .append("text")
+            .text(d => d)
+            .attr("class", "categoryLabel")
+            .attr("x", (d, i) => (i + 0.5) / 4 * width)
+            .attr("y", 32)
+            .attr("text-anchor", "middle")
+            .style("font-family", "FB")
+            .style("text-transform", "uppercase")
+            .attr("fill", "white");
 
         const screen = d3.select("body").append("div")
             .attr("class", "screen");
@@ -156,10 +184,15 @@ export default function Home() {
         const width = window.innerWidth;
 
         if (data === 2) {
+            d3.selectAll("line.categoryLine").style("opacity", 0.25);
+            d3.selectAll("text.categoryLabel").style("opacity", 0.8);
+
             simulation.force("center").strength(0);
-            simulation.force("x").x(d => (1 + d.category) / 5 * width - (d.width || 386) / 2).strength(1);
+            simulation.force("x").x(d => (0.5 + d.category) / 4 * width - (d.width || 386) / 2).strength(1);
             simulation.force("y").y(height / 2).strength(0.2);
         } else {
+            d3.selectAll("line.categoryLine, text.categoryLabel").style("opacity", 0);
+
             simulation.force("x").strength(0);
             simulation.force("y").strength(0);
             simulation.force("center").strength(1.5);
@@ -179,21 +212,32 @@ export default function Home() {
                 <Step data={1}>
                     <div className="h-screen relative">
                         <div className="p-12 bg-white bg-opacity-90 rounded-md border border-box w-[600px] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 absolute">
-                            <h1 className="font-tn font-bold text-4xl">Good {TOD}, LA Times.<br/>My name is Samson Zhang.</h1>
+                            <h1 className="font-tn font-bold text-4xl">Good {TOD}, LA Times.<br/>Welcome to my portfolio.</h1>
                             <ul className="font-benton list-disc pl-4">
                                 <li className="mt-6">I’m applying to be a data and graphics intern this summer.</li>
                                 <li className="mt-6">This is an interactive portfolio showcasing how I’ve <b>served communities as a data journalist, designer and reporter.</b></li>
                             </ul>
+                            <div className="flex items-center pt-6 mt-6 border-t border-neutral-400">
+                                <img src="/profile.jpg" alt="Headshot of Samson Zhang" className="w-12 h-12 rounded-full"/>
+                                <div className="ml-4">
+                                    <p className="font-tn text-xl">Samson Zhang</p>
+                                    <a href="https://twitter.com/wwsalmon" className="mt-1 text-neutral-600 text-xs flex items-center font-medium">
+                                        <FaTwitter/>
+                                        <span className="ml-1">Twitter</span>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </Step>
                 <Step data={2}>
                     <div className="h-screen relative">
                         <div className="p-12 bg-white bg-opacity-90 rounded-md border border-box w-[600px] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 absolute">
-                            <h1 className="font-tn font-bold text-4xl">Step 2</h1>
+                            <h1 className="font-benton text-2xl">I've worked the whole range, from <b>software engineer</b> at a startup to <b>breaking news reporter</b> at a non-profit newsroom and everything in-between.</h1>
                             <ul className="font-benton list-disc pl-4">
-                                <li className="mt-6">I’m applying to be a data and graphics intern this summer.</li>
-                                <li className="mt-6">This is an interactive portfolio showcasing how I’ve <b>served communities as a data journalist, designer and reporter.</b></li>
+                                <li className="mt-6">2020-22: <b>covered California AAPI activism and politics</b> for <img src="/yappie.png" alt="Logo of The Yappie" className="w-5 h-5 inline"/> <a href="http://theyappie.com/" className="text-link underline"><i>The Yappie</i></a>, an AAJA-sponsored non-profit newsroom read by members of Congress, white house staff and advocacy leaders</li>
+                                <li className="mt-6">2021-22: data pieces I produced at my school paper, <img src="/tsl.jpg" alt="Logo of The Student Life" className="w-5 h-5 inline"/> <a href="https://tsl.news/author/samson-zhang/" className="text-link underline"><i>The Student Life</i></a>, have been awarded <b>"Best Interactive Graphic" and "Best COVID Reporting" of 2021</b> by the California College Media Association.</li>
+                                <li className="mt-6">2021: a blogging <b>startup I founded</b> was selected to interview for <img src="/ycombinator.png" alt="Logo of Y Combinator" className="w-5 h-5 inline"/> <a href="https://www.ycombinator.com/" className="text-link underline">Y Combinator</a>, the <b>incubator behind Doordash, Dropbox and Reddit</b>. More than a million words have been published on my platform to date.</li>
                             </ul>
                         </div>
                     </div>
