@@ -9,7 +9,7 @@ export default function PageContainer({children, id}: { children: ReactNode, id:
     const thisProject = highlightedProjects.find(d => d.id === id);
 
     return (
-        <div className="mx-auto px-4 max-w-6xl my-16 pb-32">
+        <div className="mx-auto px-4 max-w-3xl my-16 pb-32">
             <Head>
                 <title>{thisProject.hed} | Samson's interactive portfolio</title>
             </Head>

@@ -7,6 +7,18 @@ body {
     overflow-x: hidden;
 }
 
+.content {
+    @apply text-xl leading-normal;
+}
+
+.content p {
+    @apply my-6;
+}
+
+.content a {
+    @apply text-link underline;
+}
+
 .font-benton {
     font-family: "Benton", sans-serif;
 }
