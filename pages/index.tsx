@@ -7,6 +7,7 @@ import BottomBar from "../components/BottomBar";
 import Link from "next/link";
 import classNames from "classnames";
 import forceCollide from "../utils/forceCollide";
+import Head from "next/head";
 
 export const highlightedProjects = [
     {
@@ -247,6 +248,9 @@ export default function Home() {
 
     return (
         <>
+            <Head>
+                <title>Samson's LA Times Portfolio</title>
+            </Head>
             <Scrollama onStepEnter={scrollUpdate}>
                 <Step data={1}>
                     <div className="h-screen relative z-10">
