@@ -6,6 +6,7 @@ import {FaTwitter} from "react-icons/fa";
 import BottomBar from "../components/BottomBar";
 import Link from "next/link";
 import classNames from "classnames";
+import forceCollide from "../utils/forceCollide";
 
 export const highlightedProjects = [
     {
@@ -50,7 +51,8 @@ const simulation = d3.forceSimulation(projects)
     .force("center", d3.forceCenter(0,0).strength(1.5))
     .force("x", d3.forceX(0).strength(0))
     .force("y", d3.forceY(0).strength(0))
-    .force("collision", d3.forceCollide().radius(d => d.width / 2))
+    // .force("collision", d3.forceCollide().radius(d => d.width / 2))
+    .force("collision", forceCollide())
     .stop();
 
 export default function Home() {
@@ -285,8 +287,8 @@ export default function Home() {
                 <div className="absolute top-0 left-0 w-full h-full overflow-hidden" ref={divRef}></div>
             </div>
             <div className="max-w-4xl mx-auto my-20 px-4" id="featured">
-                <h1 className="text-tn leading-tight text-4xl max-w-2xl mb-8">Here are four selected projects that show what I'm all about.</h1>
-                <p className="text-lg text-neutral-600">Click through the four scenarios below to unlock my final message!</p>
+                <h1 className="text-tn leading-tight text-4xl max-w-2xl mb-8">Beyond technical skills, I'm ultimately proudest of the impact of my work.</h1>
+                <p className="text-lg text-neutral-600">Below are four scenarios that show what I'm all about. Click through them to unlock my final message!</p>
                 <hr className="my-12"/>
                 <BottomBar inline={true} onReset={() => setReadList([])}/>
                 <div className="grid grid-cols-2 gap-x-4 text-white my-24">
