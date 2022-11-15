@@ -41,6 +41,7 @@ function Embed({url, height}: { url: string, height?: number }) {
             src={url}
             className="relative border-4 rounded-lg shadow-2xl my-16"
             style={{height: height || 800, width: "calc(1200px)", left: "calc(-600px + 50%)"}}
+            loading="lazy"
         ></iframe>
     )
 }
