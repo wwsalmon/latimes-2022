@@ -1,3 +1,61 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.font-benton {
+    font-family: "Benton", sans-serif;
+}
+
+.font-fb {
+    font-family: "FB", sans-serif;
+}
+
+.font-tn {
+    font-family: "TN", serif;
+}
+
+.font-georgia {
+    font-family: "Georgia", serif;
+}
+
+@font-face {
+    font-family: "Benton";
+    src: url("../fonts/benton.woff2");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Benton";
+    src: url("../fonts/benton-medium.woff2");
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Benton";
+    src: url("../fonts/benton-bold.woff2");
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "FB";
+    src: url("../fonts/fb.woff2");
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "TN";
+    src: url("../fonts/tn.woff2");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "TN";
+    src: url("../fonts/tn-bold.woff2");
+    font-weight: 700;
+    font-style: normal;
+}

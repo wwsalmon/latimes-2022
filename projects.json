@@ -1,0 +1,66 @@
+[
+  {
+    "img": "plip.jpg",
+    "width": 200
+  },
+  {
+    "img": "postulate.png",
+    "width": 150
+  },
+  {
+    "img": "covid.gif",
+    "width": 300
+  },
+  {
+    "img": "co2025.gif",
+    "width": 300
+  },
+  {
+    "img": "storyboard.jpg",
+    "width": 150
+  },
+  {
+    "img": "kington1.jpg",
+    "width": 200
+  },
+  {
+    "img": "kington2.gif",
+    "width": 250
+  },
+  {
+    "img": "covid2.png",
+    "width": 300
+  },
+  {
+    "img": "strike1.jpg",
+    "width": 150
+  },
+  {
+    "img": "strike2.jpg",
+    "width": 150
+  },
+  {
+    "img": "ukraine.jpg",
+    "hed": "Invasion of Ukraine weighs heavily on 5C community members with connections to the conflict",
+    "dek": "When Maria Lyven PO '22 asked her family how they were doing last week, her mother told her that she woke up to the sound of explosions.",
+    "pub": "The Student Life"
+  },
+  {
+    "img": "sjn.png",
+    "hed": "Preventing ‘double punishment’: Inside the campaign to end California’s prison-to-deportation pipeline",
+    "dek": "A solutions piece on a decade of organizing against the deportation of formerly incarcerated Southeast Asian refugees in California.",
+    "pub": "The Yappie"
+  },
+  {
+    "img": "aaja.png",
+    "hed": "Journalism’s influential awards lack diverse judges",
+    "dek": "A groundbreaking investigative finding that people of color are often still the only person of their race in the (judging) room.",
+    "pub": "Asian American Journalist Association"
+  },
+  {
+    "img": "lowell.jpg",
+    "hed": "Voters oust San Francisco school board members in historic race that galvanized AAPIs",
+    "dek": "The city’s first Pacific Islander elected leader was one of three officials recalled in Tuesday’s high-stakes special election, which featured a surge in AAPI activism.",
+    "pub": "The Yappie"
+  }
+]
