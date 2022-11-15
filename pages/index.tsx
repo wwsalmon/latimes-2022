@@ -2,6 +2,13 @@ import {useEffect, useRef} from "react";
 import * as d3 from "d3";
 import projects from "../projects.json";
 
+const TOD = (() => {
+    const currHour = new Date().getHours();
+    if (currHour < 12) return "morning";
+    if (currHour < 18) return "afternoon";
+    return "evening";
+})();
+
 export default function Home() {
     const svgRef = useRef<SVGSVGElement | null>(null);
     const divRef = useRef<HTMLDivElement | null>(null);
@@ -34,16 +41,22 @@ export default function Home() {
             .attr("y", 0)
             .attr("fill", "#222");
 
+        const screen = d3.select("body").append("div")
+            .attr("class", "screen");
+
         function tick() {
-            div.selectAll("img")
+            div.selectAll("img.story")
                 .data(projects.filter(d => !("hed" in d)))
                 .join("img")
+                .attr("class", "story")
                 .attr("src", d => "/cloud/" + d.img)
                 .style("width", d => d.width + "px")
                 .style("position", "absolute")
                 .style("border-radius", 4 + "px")
                 .style("left", d => d.x + "px")
-                .style("top", d => d.y + "px");
+                .style("top", d => d.y + "px")
+                .on("mouseover", () => screen.style("display", "block"))
+                .on("mouseout", () => screen.style("display", "none"));
 
             div.selectAll("div.story")
                 .data(projects.filter(d => "hed" in d))
@@ -56,15 +69,19 @@ export default function Home() {
                             .style("left", d => d.x + "px")
                             .style("top", d => d.y + "px")
                             .style("display", "flex")
-                            .style("align-items", "center");
+                            .style("align-items", "center")
+                            .on("mouseover", () => screen.style("display", "block"))
+                            .on("mouseout", () => screen.style("display", "none"));
 
-                        thisDiv.append("div")
+                        thisDiv.append("img")
                             .attr("class", "storyImg")
                             .style("width", "150px")
                             .style("height", "100px")
-                            .style("background-position", "center center")
-                            .style("background-size", "cover")
-                            .style("background-image", d => `url("/cloud/${d.img}")`);
+                            .attr("src", d => "/cloud/" + d.img)
+                            .style("object-fit", "cover");
+                            // .style("background-position", "center center")
+                            // .style("background-size", "cover")
+                            // .style("background-image", d => `url("/cloud/${d.img}")`);
 
                         const contentDiv = thisDiv.append("div")
                             .style("margin-left", "16px")
@@ -100,6 +117,13 @@ export default function Home() {
         <div className="relative">
             <svg ref={svgRef}/>
             <div className="absolute top-0 left-0 w-full h-full overflow-hidden" ref={divRef}></div>
+            <div className="p-12 bg-white rounded-md border border-box w-[600px] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 absolute">
+                <h1 className="font-tn font-bold text-4xl">Good {TOD}, LA Times.<br/>My name is Samson Zhang.</h1>
+                <ul className="font-benton list-disc pl-4">
+                    <li className="mt-6">I’m applying to be a data and graphics intern this summer.</li>
+                    <li className="mt-6">This is an interactive portfolio showcasing how I’ve <b>served communities as a data journalist, designer and reporter.</b></li>
+                </ul>
+            </div>
         </div>
     );
 }
