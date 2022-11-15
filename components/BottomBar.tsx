@@ -30,7 +30,7 @@ export default function BottomBar({inline, onReset}: {inline?: boolean, onReset?
             <div className={classNames(!inline && "max-w-2xl mx-auto px-4")}>
                 <p>You've read {readList.length} of 4 scenarios.</p>
                 <div className="w-full h-4 bg-zinc-200 my-2 relative">
-                    <div className={classNames("absolute h-full bg-green-500", {1: "w-1/4", 2: "w-1/2", 3: "w-3/4", 4: "w-full"}[readList.length])}></div>
+                    <div className={classNames("absolute h-full bg-green-500", {0: "w-2", 1: "w-1/4", 2: "w-1/2", 3: "w-3/4", 4: "w-full"}[readList.length])}></div>
                 </div>
                 {inline && (readList.length === 4) ? (
                     <>

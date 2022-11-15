@@ -251,7 +251,7 @@ export default function Home() {
                         <div className="p-12 bg-white bg-opacity-90 rounded-md border border-box w-[600px] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 absolute">
                             <h1 className="font-tn font-bold text-4xl">Good {TOD}, LA Times.<br/>Welcome to my portfolio.</h1>
                             <ul className="font-benton list-disc pl-4">
-                                <li className="mt-6">I’m applying to be a data and graphics intern this summer.</li>
+                                <li className="mt-6">I’m a student journalist at Pomona College in LA applying to be a data and graphics intern this summer.</li>
                                 <li className="mt-6">This is an interactive portfolio showcasing how I’ve <b>served communities as a data journalist, designer and reporter.</b></li>
                             </ul>
                             <div className="flex items-center pt-6 mt-6 border-t border-neutral-400">
