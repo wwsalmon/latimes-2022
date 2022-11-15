@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+    font-family: "Georgia", sans-serif;
+    overflow-x: hidden;
+}
+
 .font-benton {
     font-family: "Benton", sans-serif;
 }
@@ -45,6 +50,11 @@
 .categoryLine, .categoryLabel {
     opacity: 0;
     transition: opacity 0.2s ease;
+}
+
+.card:nth-child(even) {
+    position: relative;
+    top: 32px;
 }
 
 @font-face {

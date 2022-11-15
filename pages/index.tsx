@@ -1,8 +1,42 @@
-import {useEffect, useRef} from "react";
+import {useEffect, useRef, useState} from "react";
 import * as d3 from "d3";
 import projects from "../projects.json";
 import { Scrollama, Step } from "react-scrollama";
 import {FaTwitter} from "react-icons/fa";
+import BottomBar from "../components/BottomBar";
+import Link from "next/link";
+import classNames from "classnames";
+
+export const highlightedProjects = [
+    {
+        index: 1,
+        title: "COVID data that faculty relied on in the absence of admin reporting",
+        hed: "5C COVID Dashboard",
+        dek: "A dashboard for COVID testing data that faculty relied on, that exposed official over-counting and that was awarded Best COVID Coverage of 2021 by the CA College Media Assoc.",
+        id: "covid",
+    },
+    {
+        index: 2,
+        title: "A first-of-its-kind investigation into journalism’s top awards",
+        hed: "Journalism’s influential awards lack diverse judges",
+        dek: "A groundbreaking investigative through the AAJA Voices fellowship that resulted in a first-of-its kind dataset and calls for change by top news leaders.",
+        id: "pulitzers",
+    },
+    {
+        index: 3,
+        title: "Explaining COVID's damage to admitted student diversity",
+        hed: "The COVID effect",
+        dek: "How did Pomona admit its most competitive and least diverse class in years? Because of a record number of deferrals, the data shows.",
+        id: "admissions",
+    },
+    {
+        index: 4,
+        title: "Filling gaps in documentation of community activism",
+        hed: "Claremont Undercurrents",
+        dek: "Habada.",
+        id: "undercurrents",
+    },
+];
 
 const TOD = (() => {
     const currHour = new Date().getHours();
@@ -20,9 +54,17 @@ const simulation = d3.forceSimulation(projects)
     .stop();
 
 export default function Home() {
+    const [readList, setReadList] = useState<string[]>([]);
+
     const svgRef = useRef<SVGSVGElement | null>(null);
     const divRef = useRef<HTMLDivElement | null>(null);
     const didMount = useRef<boolean>(false);
+
+    useEffect(() => {
+        if (!didMount) return;
+        let localReadList = JSON.parse(window.localStorage.getItem("LATreadList"));
+        setReadList(localReadList);
+    }, [didMount.current]);
 
     useEffect(() => {
         if (!svgRef.current || !divRef.current || !window || didMount.current) return;
@@ -203,14 +245,9 @@ export default function Home() {
 
     return (
         <>
-            <div className="fixed left-0 top-0 w-full h-screen">
-                <svg ref={svgRef}/>
-                <div className="absolute top-0 left-0 w-full h-full overflow-hidden" ref={divRef}></div>
-            </div>
-
             <Scrollama onStepEnter={scrollUpdate}>
                 <Step data={1}>
-                    <div className="h-screen relative">
+                    <div className="h-screen relative z-10">
                         <div className="p-12 bg-white bg-opacity-90 rounded-md border border-box w-[600px] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 absolute">
                             <h1 className="font-tn font-bold text-4xl">Good {TOD}, LA Times.<br/>Welcome to my portfolio.</h1>
                             <ul className="font-benton list-disc pl-4">
@@ -231,7 +268,7 @@ export default function Home() {
                     </div>
                 </Step>
                 <Step data={2}>
-                    <div className="h-screen relative">
+                    <div className="h-screen relative z-10">
                         <div className="p-12 bg-white bg-opacity-90 rounded-md border border-box w-[600px] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 absolute">
                             <h1 className="font-benton text-2xl">I've worked the whole range, from <b>software engineer</b> at a startup to <b>breaking news reporter</b> at a non-profit newsroom and everything in-between.</h1>
                             <ul className="font-benton list-disc pl-4">
@@ -243,6 +280,33 @@ export default function Home() {
                     </div>
                 </Step>
             </Scrollama>
+            <div className="sticky left-0 bottom-0 w-full h-screen">
+                <svg ref={svgRef}/>
+                <div className="absolute top-0 left-0 w-full h-full overflow-hidden" ref={divRef}></div>
+            </div>
+            <div className="max-w-4xl mx-auto my-20 px-4" id="featured">
+                <h1 className="text-tn leading-tight text-4xl max-w-2xl mb-8">Here are four selected projects that show what I'm all about.</h1>
+                <p className="text-lg text-neutral-600">Click through the four scenarios below to unlock my final message!</p>
+                <hr className="my-12"/>
+                <BottomBar inline={true}/>
+                <div className="grid grid-cols-2 gap-x-4 text-white my-24">
+                    {highlightedProjects.map((d, i) => (
+                        <Card index={i + 1} title={d.title} read={readList.includes(d.id)} key={d.id} id={d.id}/>
+                    ))}
+                </div>
+            </div>
         </>
     );
+}
+
+function Card({index, title, read, id}: {index: number, title: string, read: boolean, id: string}) {
+    return (
+        <Link href={`/${id}`} className={classNames(read ? "bg-zinc-400 hover:scale-[1.02] hover:shadow-lg" : "bg-zinc-800 hover:scale-105 hover:shadow-xl", "p-4 rounded-md mb-4 flex flex-col justify-between relative card transform transition")}>
+            {read && (
+                <p className="absolute top-4 right-4 font-bold font-fb uppercase tracking-wide">READ</p>
+            )}
+            <h2 className="font-benton text-2xl font-bold mb-8">{index}.</h2>
+            <p className="text-3xl font-tn">{title}</p>
+        </Link>
+    )
 }
