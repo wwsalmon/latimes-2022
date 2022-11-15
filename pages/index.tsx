@@ -2,7 +2,7 @@ import {useEffect, useRef, useState} from "react";
 import * as d3 from "d3";
 import projects from "../projects.json";
 import { Scrollama, Step } from "react-scrollama";
-import {FaTwitter} from "react-icons/fa";
+import {FaGithub, FaTwitter} from "react-icons/fa";
 import BottomBar from "../components/BottomBar";
 import Link from "next/link";
 import classNames from "classnames";
@@ -260,10 +260,16 @@ export default function Home() {
                                 <img src="/profile.jpg" alt="Headshot of Samson Zhang" className="w-12 h-12 rounded-full"/>
                                 <div className="ml-4">
                                     <p className="font-tn text-xl">Samson Zhang</p>
-                                    <a href="https://twitter.com/wwsalmon" className="mt-1 text-neutral-600 text-xs flex items-center font-medium font-benton">
-                                        <FaTwitter/>
-                                        <span className="ml-1">Twitter</span>
-                                    </a>
+                                    <div className="flex items-center">
+                                        <a href="https://twitter.com/wwsalmon" className="mt-1 text-neutral-600 text-xs flex items-center font-medium font-benton">
+                                            <FaTwitter/>
+                                            <span className="ml-1">Twitter</span>
+                                        </a>
+                                        <a href="https://github.com/wwsalmon" className="ml-4 mt-1 text-neutral-600 text-xs flex items-center font-medium font-benton">
+                                            <FaGithub/>
+                                            <span className="ml-1">GitHub</span>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
