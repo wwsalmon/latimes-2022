@@ -28,7 +28,7 @@ export default function Home() {
         const div = d3.select(divRef.current);
 
         const simulation = d3.forceSimulation(projects)
-            .force("charge", d3.forceManyBody().strength(-200))
+            .force("charge", d3.forceManyBody().strength(-300))
             .force("center", d3.forceCenter(width / 2, height / 2))
             // .force("centerY", d3.forceY(height / 2))
             // .force("centerX", d3.forceX(d => Math.min(Math.max(d.score * width, 0), width - 100)))
@@ -47,16 +47,30 @@ export default function Home() {
         function tick() {
             div.selectAll("img.story")
                 .data(projects.filter(d => !("hed" in d)))
-                .join("img")
-                .attr("class", "story")
-                .attr("src", d => "/cloud/" + d.img)
-                .style("width", d => d.width + "px")
-                .style("position", "absolute")
-                .style("border-radius", 4 + "px")
-                .style("left", d => d.x + "px")
-                .style("top", d => d.y + "px")
-                .on("mouseover", () => screen.style("display", "block"))
-                .on("mouseout", () => screen.style("display", "none"));
+                .join(
+                    enter => {
+                        enter.append("img")
+                            .attr("class", "story")
+                            .attr("src", d => "/cloud/" + d.img)
+                            .style("width", d => d.width + "px")
+                            .style("position", "absolute")
+                            .style("border-radius", 4 + "px")
+                            .style("left", d => Math.min(Math.max(d.x, 0), width - d.width) + "px")
+                            .style("top", d => {
+                                return Math.max(d.y, 0) + "px"
+                            })
+                            .on("mouseover", () => screen.style("display", "block"))
+                            .on("mouseout", () => screen.style("display", "none"));
+                    },
+                    update => {
+                        const heights = update._groups[0].map(d => d.offsetHeight);
+
+                        update
+                            .style("left", d => Math.min(Math.max(d.x, 0), width - d.width) + "px")
+                            .style("top", (d, i) => Math.min(Math.max(d.y, 0), height - heights[i]) + "px");
+                    }
+                );
+
 
             div.selectAll("div.story")
                 .data(projects.filter(d => "hed" in d))
@@ -66,8 +80,10 @@ export default function Home() {
                             .append("div")
                             .attr("class", "story")
                             .style("position", "absolute")
-                            .style("left", d => d.x + "px")
-                            .style("top", d => d.y + "px")
+                            .style("left", d => Math.min(Math.max(d.x, 0), width - 386) + "px")
+                            .style("top", d => {
+                                return Math.max(d.y, 0) + "px";
+                            })
                             .style("display", "flex")
                             .style("align-items", "center")
                             .on("mouseover", () => screen.style("display", "block"))
@@ -107,7 +123,11 @@ export default function Home() {
                             .style("font-size", "10px");
                     },
                     update => {
-                        update.style("left", d => d.x + "px").style("top", d => d.y + "px");
+                        const heights = update._groups[0].map(d => d.offsetHeight);
+
+                        update
+                            .style("left", d => Math.min(Math.max(d.x, 0), width - 386) + "px")
+                            .style("top", (d, i) => Math.min(Math.max(d.y, 0), height - heights[i]) + "px");
                     }
                 )
         }
